@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <!-- Link to stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content: Units Tab -->
+  <div class="main-content">
+    <!-- Page title with setting icon -->
+    <div class="page-title">
+      <img src="../../graphics/Setting.svg" alt="Settings icon">
+      Settings
+    </div>
+
+    <div class="settings-container">
+      <!-- Tab: Units | Credits | About -->
+      <div class="settings-tabs">
+        <button class="tab-btn active">Units</button>
+        <button class="tab-btn" onclick="window.location.href='read-credits-settings.html'">Credits</button>
+        <button class="tab-btn" onclick="window.location.href='read-about-settings.html'">About</button>
+      </div>
+
+      <!-- Units Tab Content -->
+      <div class="tab-content active" id="tab-units">
+        <!-- Temperature unit: Celsius or Fahrenheit -->
+        <div class="settings-row">
+          <span class="setting-label">Temperature</span>
+          <div class="unit-toggle" data-setting="temperature">
+            <button class="unit-btn" data-value="C">°C</button>
+            <button class="unit-btn" data-value="F">°F</button>
+          </div>
+        </div>
+
+        <!-- Distance unit: Kilometres or Miles -->
+        <div class="settings-row">
+          <span class="setting-label">Distance</span>
+          <div class="unit-toggle" data-setting="distance">
+            <button class="unit-btn" data-value="km">km</button>
+            <button class="unit-btn" data-value="mi">mi</button>
+          </div>
+        </div>
+
+        <!-- Precipitation unit: Millimetres or Inches -->
+        <div class="settings-row">
+          <span class="setting-label">Precipitation</span>
+          <div class="unit-toggle" data-setting="precipitation">
+            <button class="unit-btn" data-value="mm">mm</button>
+            <button class="unit-btn" data-value="in">in</button>
+          </div>
+        </div>
+
+        <!-- Speed unit: km/h, mph, m/s, or knots -->
+        <div class="settings-row">
+          <span class="setting-label">Speed</span>
+          <div class="unit-toggle" data-setting="speed">
+            <button class="unit-btn" data-value="km/h">km/h</button>
+            <button class="unit-btn" data-value="mph">mph</button>
+            <button class="unit-btn" data-value="m/s">m/s</button>
+            <button class="unit-btn" data-value="knots">knots</button>
+          </div>
+        </div>
+
+        <!-- Pressure unit: mb, mmHg, or inHg -->
+        <div class="settings-row">
+          <span class="setting-label">Pressure</span>
+          <div class="unit-toggle" data-setting="pressure">
+            <button class="unit-btn" data-value="mb">mb</button>
+            <button class="unit-btn" data-value="mmHg">mmHg</button>
+            <button class="unit-btn" data-value="inHg">inHg</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-settings');
+
+    // Current settings object
+    let currentSettings = {
+      temperature: 'C',
+      distance: 'km',
+      precipitation: 'mm',
+      speed: 'km/h',
+      pressure: 'mb',
+    };
+
+    // Loads saved settings from the main process and updates the toggle buttons
+    async function loadSettings() {
+      currentSettings = await WeatherPlatform.invoke('get-settings');
+
+      // For each unit toggle, activate the matching button
+      document.querySelectorAll('.unit-toggle').forEach((group) => {
+        const settingKey = group.dataset.setting;    
+        const currentValue = currentSettings[settingKey];
+
+        group.querySelectorAll('.unit-btn').forEach((btn) => {
+          // Mark matching button as active
+          btn.classList.toggle('active', btn.dataset.value === currentValue);
+
+          // Add click handler to update settings on selection
+          btn.addEventListener('click', async () => {
+            // Remove active from all buttons in this group
+            group.querySelectorAll('.unit-btn').forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Update and save settings
+            currentSettings[settingKey] = btn.dataset.value;
+            await WeatherPlatform.invoke('save-settings', currentSettings);
+          });
+        });
+      });
+    }
+
+    loadSettings();
+  </script>
+</body>
+</html>

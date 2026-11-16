@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Location</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <div class="main-content">
+    <div class="page-title">
+      <img src="../../graphics/Location.svg" alt="Location icon">
+      Edit information
+    </div>
+    <!-- Prompt user to edit nickname and primary status -->
+    <div class="settings-container">
+      <div class="modal-form-row">
+        <label>Nickname/alias :</label>
+        <input type="text" id="edit-alias" placeholder="Enter nickname">
+      </div>
+      <div class="modal-form-row">
+        <label>Primary location:</label>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="upd-yes" onclick="setUpdPrimary(true)">Yes</button>
+          <button class="toggle-btn" id="upd-no" onclick="setUpdPrimary(false)">No</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button onclick="updateLocation()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-locations');
+
+    let editPrimary = true; // Default primary toggle value
+
+    // Sets the primary toggle value for the update form.
+    function setUpdPrimary(val) {
+      editPrimary = val;
+      document.getElementById('upd-yes').classList.toggle('active', val);
+      document.getElementById('upd-no').classList.toggle('active', !val);
+    }
+
+    // Saves nickname and primary location to the main process 
+    async function updateLocation() {
+      const index = parseInt(sessionStorage.getItem('editIndex') || '0');
+      const alias = document.getElementById('edit-alias').value.trim();
+      await WeatherPlatform.invoke('update-location', index, alias, editPrimary);
+      window.location.href = 'read-location.html';
+    }
+  </script>
+</body>
+</html>

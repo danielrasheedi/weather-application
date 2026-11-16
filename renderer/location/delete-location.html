@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Location</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <div class="main-content">
+    <div class="page-title">
+      <img src="../../graphics/Location.svg" alt="Location icon">
+      Delete location
+    </div>
+    <!-- Shows location name and confirm button -->
+    <div class="settings-container">
+      <div style="margin-bottom: 15px;">
+        <input type="text" id="del-name" readonly>
+      </div>
+      <div class="modal-actions">
+        <button onclick="deleteLocation()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-locations');
+
+    // Display the location name
+    const delName = sessionStorage.getItem('deleteName') || '';
+    document.getElementById('del-name').value = delName;
+
+    // Removes the location at the stored index from the saved locations
+    async function deleteLocation() {
+      const index = parseInt(sessionStorage.getItem('deleteIndex') || '0');
+      await WeatherPlatform.invoke('delete-location', index);
+      window.location.href = 'read-location.html'; // Navigate back to locations
+    }
+  </script>
+</body>
+</html>

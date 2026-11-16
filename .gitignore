@@ -1,0 +1,10 @@
+# Secrets
+.env
+.env.*
+
+# Installed packages and builds
+node_modules/
+dist/
+
+# Your saved locations and units (the app creates them on first run)
+data/

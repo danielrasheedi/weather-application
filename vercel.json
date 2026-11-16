@@ -1,0 +1,21 @@
+{
+  "installCommand": "echo \"No install needed: the website has no npm dependencies\"",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/renderer/home/read-home.html",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(renderer|graphics)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

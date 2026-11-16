@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Location</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <div class="main-content">
+    <div class="page-title">
+      <img src="../../graphics/Location.svg" alt="Location icon">
+      New location
+    </div>
+    <!-- Prompt user to enter a new location -->
+    <div class="settings-container">
+      <div style="margin-bottom: 15px;">
+        <label>City name:</label>
+        <input type="text" id="new-city-input" placeholder="Enter city name" style="margin-top:8px;">
+      </div>
+      <div class="modal-actions">
+        <button onclick="createLocation()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-locations');
+
+    // Adds a new location by sending the city name to the main process via IPC, then redirects to locations page
+    async function createLocation() {
+      const query = document.getElementById('new-city-input').value.trim();
+      if (!query) return;
+      await WeatherPlatform.invoke('add-location', query);
+      window.location.href = 'read-location.html'; // Navigate back to locations
+    }
+  </script>
+</body>
+</html>
