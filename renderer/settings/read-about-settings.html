@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <!-- Link to stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content: About Tab -->
+  <div class="main-content">
+    <!-- Page title with Setting icon -->
+    <div class="page-title">
+      <img src="../../graphics/Setting.svg" alt="Settings icon">
+      Settings
+    </div>
+
+    <div class="settings-container">
+      <!-- Tab: Units | Credits | About -->
+      <div class="settings-tabs">
+        <button class="tab-btn" onclick="window.location.href='update-units-settings.html'">Units</button>
+        <button class="tab-btn" onclick="window.location.href='read-credits-settings.html'">Credits</button>
+        <button class="tab-btn active">About</button>
+      </div>
+
+      <!-- About Tab Content -->
+      <div class="tab-content active">
+        <!-- Version -->
+        <div class="about-block">
+          <div class="about-title">Version</div>
+          <div class="about-text">1.0.0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-settings');
+  </script>
+</body>
+</html>

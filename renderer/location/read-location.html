@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <!-- Link to stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content: Locations Page -->
+  <div class="main-content">
+    <!-- Page title with location icon -->
+    <div class="page-title">
+      <img src="../../graphics/Location.svg" alt="Location icon">
+      Saved locations
+    </div>
+
+    <!-- Grid of location -->
+    <div class="locations-grid" id="locations-grid">
+      <!-- Location cards are dynamically inserted by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Add new location -->
+  <div class="modal-overlay" id="create-modal">
+    <div class="modal-content">
+      <div class="modal-title">New location</div>
+      <button class="modal-close" onclick="closeCreateModal()"><img src="../../graphics/Exit.svg"></button>
+      <div style="margin-top: 15px;">
+        <!-- Text input for the new location name -->
+        <input type="text" id="create-input" placeholder="Enter city name">
+      </div>
+      <div class="modal-actions">
+        <button onclick="submitCreate()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit location nickname and primary status -->
+  <div class="modal-overlay" id="update-modal">
+    <div class="modal-content">
+      <div class="modal-title">Edit information</div>
+      <div class="modal-subtitle" id="update-subtitle"></div>
+      <button class="modal-close" onclick="closeUpdateModal()"><img src="../../graphics/Exit.svg"></button>
+      <!-- Nickname/alias input row -->
+      <div class="modal-form-row">
+        <label>Nickname/alias&nbsp; :</label>
+        <input type="text" id="update-alias-input">
+      </div>
+      <!-- Primary location toggle row -->
+      <div class="modal-form-row">
+        <label>Primary location:</label>
+        <div class="toggle-group">
+          <button class="toggle-btn" id="toggle-yes" onclick="setPrimary(true)">Yes</button>
+          <button class="toggle-btn" id="toggle-no" onclick="setPrimary(false)">No</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button onclick="submitUpdate()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm location deletion -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal-content">
+      <div class="modal-title">Delete?</div>
+      <button class="modal-close" onclick="closeDeleteModal()"><img src="../../graphics/Exit.svg"></button>
+      <div style="margin-top: 15px;">
+        <!-- Read-only field showing the location to delete -->
+        <input type="text" id="delete-input" readonly>
+      </div>
+      <div class="modal-actions">
+        <button onclick="confirmDelete()">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-locations');
+  </script>
+  <script src="read-location.js"></script>
+</body>
+</html>

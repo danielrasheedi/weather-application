@@ -1,0 +1,8 @@
+# Only the website files (renderer/, graphics/, api/) are uploaded to Vercel
+node_modules
+dist
+data
+scripts
+main.js
+package-lock.json
+preload.js

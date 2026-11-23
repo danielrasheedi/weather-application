@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <!-- Link to stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content: Forecast Page -->
+  <div class="main-content">
+    <!-- Page title with location name -->
+    <div class="page-title">
+      <img src="../../graphics/Weather.svg" alt="Weather icon">
+      <span id="forecast-location">Loading...</span>
+    </div>
+
+    <!-- Current Weather Section -->
+    <div class="current-weather">
+      <!-- Temperature and condition -->
+      <div class="temp-section">
+        <div class="temp-value" id="current-temp">--°<span class="temp-unit">C</span></div>
+        <div class="condition-text" id="current-condition">--</div>
+        <div class="feels-like" id="current-feels">Feels like --°C</div>
+      </div>
+      <!-- Weather details grid -->
+      <div class="weather-details">
+        <div class="detail-item">
+          <span class="detail-label">Precipitation</span>
+          <span class="detail-value" id="detail-precip">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Wind</span>
+          <span class="detail-value" id="detail-wind">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Humidity</span>
+          <span class="detail-value" id="detail-humidity">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">UV index</span>
+          <span class="detail-value" id="detail-uv">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Visibility</span>
+          <span class="detail-value" id="detail-visibility">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Gust</span>
+          <span class="detail-value" id="detail-gust">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Dewpoint</span>
+          <span class="detail-value" id="detail-dewpoint">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Pressure</span>
+          <span class="detail-value" id="detail-pressure">--</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hourly Forecast -->
+    <div class="section-title">Hourly forecast</div>
+    <div class="hourly-forecast">
+      <div class="hourly-container" id="hourly-container">
+        <!-- Hourly cards are dynamically inserted by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Activity Recommendations -->
+    <div class="recommendations">
+      <div class="section-title">Recommendations</div>
+      <div class="recommendations-container" id="recommendations-container">
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-forecast');
+  </script>
+  <script src="read-home.js"></script>
+</body>
+</html>

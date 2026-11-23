@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  <!-- Link to stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content: Credits Tab -->
+  <div class="main-content">
+    <!-- Page title with setting icon -->
+    <div class="page-title">
+      <img src="../../graphics/Setting.svg" alt="Settings icon">
+      Settings
+    </div>
+
+    <div class="settings-container">
+      <!-- Tab: Units | Credits | About -->
+      <div class="settings-tabs">
+        <button class="tab-btn" onclick="window.location.href='update-units-settings.html'">Units</button>
+        <button class="tab-btn active">Credits</button>
+        <button class="tab-btn" onclick="window.location.href='read-about-settings.html'">About</button>
+      </div>
+
+      <!-- Credits Tab Content -->
+      <div class="tab-content active">
+        <!-- Data source credit -->
+        <div class="credits-block">
+          <div class="credits-title">Data</div>
+          <div class="credits-text">Powered by WeatherAPI.com</div>
+        </div>
+
+        <!-- Iconography credits -->
+        <div class="credits-block">
+          <div class="credits-title">Iconography</div>
+          <div class="credits-text">
+            Weather by iconisme from Noun Project (CC BY 3.0)<br>
+            Location arrow by rekongsatun82 from Noun Project (CC BY 3.0)<br>
+            Setting by icelloid from Noun Project (CC BY 3.0)<br>
+            Pencil by Arkinasi from Noun Project (CC BY 3.0)<br>
+            Activities from Hugeicons (MIT License)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/platform.js"></script>
+  <script>
+    // Load sidebar
+    WeatherPlatform.renderSidebar('nav-settings');
+  </script>
+</body>
+</html>
